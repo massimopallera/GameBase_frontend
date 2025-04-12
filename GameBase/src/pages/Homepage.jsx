@@ -3,7 +3,6 @@ import GameCard from "../components/GameCard";
 import { useGamesContext } from "../context/GamesContext";
 
 export default function Homepage() {
-  // const [games, setGames] = useState([]);
 
   const {games} = useGamesContext();
 

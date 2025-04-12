@@ -23,6 +23,6 @@ export const PlatformsProvider = ({ children }) => {
   );
 };
 
-export function useplatformsContext(){
+export function usePlatformsContext(){
     return useContext(PlatformsContext);
 }

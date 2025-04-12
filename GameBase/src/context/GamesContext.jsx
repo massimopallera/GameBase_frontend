@@ -8,6 +8,8 @@ export const GamesProvider = ({ children }) => {
   useEffect(() => {
 
     const url = `${import.meta.env.VITE_REST}/games`
+    console.log(url);
+    
     
     fetch(url)
       .then(res => res.json())
