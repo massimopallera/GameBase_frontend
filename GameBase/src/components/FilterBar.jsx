@@ -26,10 +26,25 @@ function FilterBar() {
         navigate(`/platforms/${value}/games`);
     };
 
+    const [searchValue, setSearchValue] = useState("");
+    // const navigate = useNavigate();
+
+    function handleForm(e){
+        e.preventDefault();
+        navigate(`/games?title=${searchValue}`);
+    }
+
     return (
-    <div className="d-flex gap-3 mb-3">
+    <div className="d-flex gap-3 mb-3 align-items-center">
+      
       <div className="form-group">
-        <label htmlFor="genreFilter" className="form-label">Filtro per Genere</label>
+          <form className="form-inline d-flex" onSubmit={handleForm}>
+              <input className="form-control bg-secondary text-light border-0" type="search" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}/>
+              <button type="submit">Cerca</button>
+          </form> 
+      </div>
+      
+      <div className="form-group">
         <select
           name="genreFilter"
           id="genreFilter"
@@ -45,7 +60,6 @@ function FilterBar() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="platformFilter" className="form-label">Filtro per Piattaforma</label>
         <select
           name="platformFilter"
           id="platformFilter"
