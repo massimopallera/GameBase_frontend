@@ -10,9 +10,9 @@ export default function Homepage() {
     <div className="container">
       <h1 className="mb-4 text-center">Games</h1>
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        {games.map(game => (
+        {games[0] ?  games.map(game => (
           <GameCard key={game.id} game={game}/>
-        ))}
+        )) : <h2>NOT FOUND</h2>}
       </div>
     </div>
   );

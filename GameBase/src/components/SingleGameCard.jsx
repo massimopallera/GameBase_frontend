@@ -2,26 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Stars from "./Stars";
 
-function GameDetail() {
+export default function SingleGameCard() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_REST}/games/${id}`)
       .then(res => res.json())
       .then(data => {
         setGame(data);
-        setLoading(false);
       })
-      .catch(err => {
-        console.error("Errore nel fetch:", err);
-        setLoading(false);
-      });
+      // .catch(err => console.error("Errore nel fetch:", err));
   }, [id]);
-
-  if (loading) return <p className="text-center text-light mt-5">Caricamento...</p>;
-  if (!game) return <p className="text-center text-danger mt-5">Gioco non trovato</p>;
 
   return (
     <div className="bg-dark text-light min-vh-100 d-flex flex-column">
@@ -69,10 +61,10 @@ function GameDetail() {
           <div className="col-lg-4">
             <div className="bg-secondary p-3 rounded">
               <h5>Altre info</h5>
-              <div className="mb-1 d-flex gap-2"><strong>Rating:</strong> <Stars rating={game.rating}></Stars>
-
-               </div>
-              {/* aggiungi qui altri dettagli se ne hai */}
+              <div className="mb-1 d-flex gap-2"><strong>Rating:</strong> <Stars rating={game.rating}></Stars></div>
+              
+              <div className=""><strong>Prezzo:</strong>  {game.price > 0 ? `${game.price}€` : 'Gratis'}</div>
+              
             </div>
           </div>
         </div>
@@ -80,5 +72,3 @@ function GameDetail() {
     </div>
   );
 }
-
-export default GameDetail;

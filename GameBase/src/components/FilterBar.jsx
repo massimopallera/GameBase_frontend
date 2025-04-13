@@ -9,41 +9,37 @@ function FilterBar() {
     const {platforms} = usePlatformsContext();
 
     const navigate = useNavigate();
-    const [selectedGenre, setSelectedGenre] = useState('');
-    const [selectedPlatform, setSelectedPlatform] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState("");
+    const [selectedPlatform, setSelectedPlatform] = useState("");
+    const [searchValue, setSearchValue] = useState("");
+
 
     const handleGenreChange = (e) => {
         const value = e.target.value;
         setSelectedGenre(value);
-        setSelectedPlatform(''); // reset piattaforma
+        setSelectedPlatform(""); // reset platform
+        setSearchValue("");
         navigate(`/genres/${value}/games`);
     };
 
     const handlePlatformChange = (e) => {
         const value = e.target.value;
         setSelectedPlatform(value);
-        setSelectedGenre(''); // reset genere
+        setSelectedGenre(""); // reset genre
+        setSearchValue("");
         navigate(`/platforms/${value}/games`);
     };
 
-    const [searchValue, setSearchValue] = useState("");
-    // const navigate = useNavigate();
-
     function handleForm(e){
         e.preventDefault();
+        setSelectedGenre(""); // reset genre
+        setSelectedPlatform(""); // reset platform
         navigate(`/games?title=${searchValue}`);
     }
 
     return (
     <div className="d-flex gap-3 mb-3 align-items-center">
-      
-      <div className="form-group">
-          <form className="form-inline d-flex" onSubmit={handleForm}>
-              <input className="form-control bg-secondary text-light border-0" type="search" placeholder="Search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}/>
-              <button type="submit">Cerca</button>
-          </form> 
-      </div>
-      
+            
       <div className="form-group">
         <select
           name="genreFilter"
@@ -52,7 +48,7 @@ function FilterBar() {
           value={selectedGenre}
           onChange={handleGenreChange}
         >
-          <option value="">Seleziona un genere</option>
+          <option disabled="true" value="">Seleziona un genere</option>
           {genres.map((genre, i) => (
             <option key={i} value={genre.id}>{genre.name}</option>
           ))}
@@ -67,12 +63,26 @@ function FilterBar() {
           value={selectedPlatform}
           onChange={handlePlatformChange}
         >
-          <option value="">Seleziona una piattaforma</option>
+          <option disabled="true" value="">Seleziona una piattaforma</option>
           {platforms.map((platform, i) => (
             <option key={i} value={platform.id}>{platform.name}</option>
           ))}
         </select>
       </div>
+
+      <div className="form-group">
+          <form className="form-inline d-flex gap-2" onSubmit={handleForm}>
+              <input 
+                className="form-control bg-secondary text-light border-0" 
+                type="search" 
+                placeholder="Search" 
+                value={searchValue} 
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <button className='btn btn-outline-light' type="submit">Cerca</button>
+          </form> 
+      </div>
+
     </div>
   );
 }
