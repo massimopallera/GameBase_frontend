@@ -38,9 +38,9 @@ function FilterBar() {
     }
 
     return (
-    <div className="d-flex gap-3 mb-3 align-items-center">
+    <div className="g-3 mb-3 row row-cols-1 row-cols-sm-3">
             
-      <div className="form-group">
+      <div className="form-group col">
         <select
           name="genreFilter"
           id="genreFilter"
@@ -48,14 +48,14 @@ function FilterBar() {
           value={selectedGenre}
           onChange={handleGenreChange}
         >
-          <option disabled="true" value="">Seleziona un genere</option>
+          <option disabled={true} value="">Seleziona un genere</option>
           {genres.map((genre, i) => (
             <option key={i} value={genre.id}>{genre.name}</option>
           ))}
         </select>
       </div>
 
-      <div className="form-group">
+      <div className="form-group col">
         <select
           name="platformFilter"
           id="platformFilter"
@@ -63,14 +63,14 @@ function FilterBar() {
           value={selectedPlatform}
           onChange={handlePlatformChange}
         >
-          <option disabled="true" value="">Seleziona una piattaforma</option>
+          <option disabled={true} value="">Seleziona una piattaforma</option>
           {platforms.map((platform, i) => (
             <option key={i} value={platform.id}>{platform.name}</option>
           ))}
         </select>
       </div>
 
-      <div className="form-group">
+      <div className="form-group col">
           <form className="form-inline d-flex gap-2" onSubmit={handleForm}>
               <input 
                 className="form-control bg-secondary text-light border-0" 
